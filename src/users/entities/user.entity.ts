@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity()
-export class Cat {
+export class User {
   @PrimaryGeneratedColumn()
   @ApiProperty()
   id: number;
@@ -13,9 +13,9 @@ export class Cat {
 
   @Column()
   @ApiProperty()
-  age: number;
+  email: string;
 
   @Column()
   @ApiProperty()
-  breed: string;
+  password: string;
 }
