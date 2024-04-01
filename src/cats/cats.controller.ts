@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { CatsService } from './cats.service';
 import { CreateCatDto } from './dto/create-cat.dto';
@@ -32,19 +33,22 @@ export class CatsController {
 
   @Get(':id')
   @ApiOkResponse({ type: Cat })
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id', ParseIntPipe) id: number) {
     return this.catsService.findOne(+id);
   }
 
   @Patch(':id')
   @ApiOkResponse({ type: Cat })
-  update(@Param('id') id: string, @Body() updateCatDto: UpdateCatDto) {
-    return this.catsService.update(+id, updateCatDto);
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateCatDto: UpdateCatDto,
+  ) {
+    return this.catsService.update(id, updateCatDto);
   }
 
   @Delete(':id')
   @ApiOkResponse({ type: Cat })
-  remove(@Param('id') id: string) {
-    return this.catsService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.catsService.remove(id);
   }
 }
